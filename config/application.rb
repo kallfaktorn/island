@@ -52,6 +52,10 @@ module Island
 
     # Enable the asset pipeline
     config.assets.enabled = true
+	config.assets.paths << "#{Rails.root}"
+
+	config.assets.prefix = "/s"
+
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
