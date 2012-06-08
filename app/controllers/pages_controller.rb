@@ -1,4 +1,6 @@
+
 class PagesController < ApplicationController
+
   # GET /pages
   # GET /pages.json
   def index
@@ -13,24 +15,12 @@ class PagesController < ApplicationController
   # GET /pages/1
   # GET /pages/1.json
   def show
-    @page = Page.find_by_id(params[:id])
+    @page = find_page_by_title(params[:title])
 
-    unless @page 
+    unless @page
       new()
       return
     end
-	
-	picture2 = File.read(Rails.root.join(@page.path))
-	
-	
-	logger.info("TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT")
-	logger.info("TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT")
-	logger.info("TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT")
-	logger.info("TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT")
-	logger.info("TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT")
-	logger.info("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB")
-	logger.info(picture2)
-	logger.info("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB")
 
     respond_to do |format|
       format.html # show.html.erb
@@ -58,7 +48,7 @@ class PagesController < ApplicationController
   # POST /pages
   # POST /pages.json
   def create
-    
+
 	id = params[:page][:id]
 	title = params[:page][:title]
 	picture = params[:page][:picture]
@@ -74,22 +64,12 @@ class PagesController < ApplicationController
 	
 	@page = Page.create(:id=>id, :title=>title, :path=>path)
 	
-	
-	logger.info("TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT")
-	logger.info("TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT")
-	logger.info("TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT")
-	logger.info("TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT")
-	logger.info("TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT")
-	logger.info("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB")
-	logger.info(filename)
-	logger.info("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB")
-
     respond_to do |format|
       if @page.save
-        format.html { redirect_to @page, notice: 'Page was successfully created.' }
-        format.json { render json: @page, status: :created, location: @page }
+        format.html { render action: "show" }
+        format.json { render :json => @page.title }
       else
-        format.html { render action: "new" }
+        format.html { render action: "show" }
         format.json { render json: @page.errors, status: :unprocessable_entity }
       end
     end
@@ -124,7 +104,21 @@ class PagesController < ApplicationController
   end
   
   # helper
+  def find_page_by_title(title)
+    for p in Page.all do
+      if p.title == title
+        return p
+      end
+    end
+	return nil
+  end
+
   def base_part_of(file_name)
     return File.basename(file_name, ".*")
-  end 
+  end
+  
+  def log(string)
+    logger.info(string)
+  end
+  
 end

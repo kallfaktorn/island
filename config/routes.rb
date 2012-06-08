@@ -59,9 +59,8 @@ Island::Application.routes.draw do
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
   root :to => 'home#index'
-  #match "/pages/0" => 'pages#new'
-  match '/pages/0(.:format)' => 'pages#new'
-  match "/pages/:id" => 'pages#show'
+  match '/0(.:format)' => 'pages#new'
+  match '/:title' => 'pages#show'
 
   # See how all your routes lay out with "rake routes"
 
