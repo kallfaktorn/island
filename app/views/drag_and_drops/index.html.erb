@@ -1,0 +1,21 @@
+<h1>Listing drag_and_drops</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @drag_and_drops.each do |drag_and_drop| %>
+  <tr>
+    <td><%= link_to 'Show', drag_and_drop %></td>
+    <td><%= link_to 'Edit', edit_drag_and_drop_path(drag_and_drop) %></td>
+    <td><%= link_to 'Destroy', drag_and_drop, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Drag and drop', new_drag_and_drop_path %>

@@ -1,4 +1,6 @@
 Island::Application.routes.draw do
+  resources :drag_and_drops
+
   resources :pages
 
   #   namespace :i do

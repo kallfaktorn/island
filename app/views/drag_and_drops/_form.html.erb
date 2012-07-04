@@ -1,0 +1,17 @@
+<%= form_for(@drag_and_drop) do |f| %>
+  <% if @drag_and_drop.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@drag_and_drop.errors.count, "error") %> prohibited this drag_and_drop from being saved:</h2>
+
+      <ul>
+      <% @drag_and_drop.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
