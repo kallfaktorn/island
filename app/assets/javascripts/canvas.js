@@ -16,6 +16,8 @@ function Canvas() {
 
 	this.initialize = function() {
 
+		defineLogger();
+
 		canvas = document.getElementById("canvas");
 		ctx = canvas.getContext('2d');	 
 	}
@@ -106,7 +108,15 @@ function Canvas() {
 				redraw();
 			};
 
-			img.src = event.target.result;
+			console.log(filetype(event.target.result));
+
+			if(isImage(event.target.result)) {
+				img.src = event.target.result;
+			}
+			else {
+				
+			}
+			
 		};
 		
 		reader.readAsDataURL(file);
@@ -149,5 +159,27 @@ function Canvas() {
 	
 	function sortImagesByLayer() {
 		self.images.sort(function(image1,image2){return image1.layer - image2.layer});
+	}
+
+	function defineLogger() {
+		if (typeof console == "undefined") {
+		    window.console = {
+		        log: function () {}
+		    };
+		}
+	}
+
+	function filetype(result) {
+
+		var dataMediaType = result.split(";")[0];
+		var mediaType = dataMediaType.split(":")[1]; 
+		var filetype = mediaType.split("/")[0];
+
+		return filetype;
+	}
+
+	function isImage(result) {
+
+		return filetype(result) == "image";
 	}
 }

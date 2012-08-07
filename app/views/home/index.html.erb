@@ -1,14 +1,16 @@
-<script type="text/javascript" src="../../assets/javascripts/jquery.min.js"></script>
-<script type="text/javascript" src="../../assets/javascripts/dragAndDrop.js"></script>
-<script type="text/javascript" src="../../assets/javascripts/events.js"></script>
-<script type="text/javascript" src="../../assets/javascripts/canvas.js"></script>
-<script type="text/javascript" src="../../assets/javascripts/imageOnCanvas.js"></script>
-<script type="text/javascript" src="../../assets/javascripts/mousePos.js"></script>
-<script type="text/javascript" src="../../assets/javascripts/position.js"></script>
-<script type="text/javascript" src="../../assets/javascripts/main.js"></script>
+
+
+<%= javascript_include_tag :defaults %>
+
+<%= sounds=[["sound1","a.mp3"], ["sound2", "b.mp3"]]%>
+
+<%= toggle_sound "sound1" %>
+
+<%= initialize_sounds(sounds, debug=true) %>
 		
 <script type="text/javascript">
 	window.onload = function() { main(); };
+	//window.onload = function() { Sound.test(); };
 </script>
 
 <canvas id="canvas" x="0" y="0" width="1530" height="718" />
